@@ -11,7 +11,12 @@ const io = new Server(server, {
   cors: { origin: '*' }
 });
 
-app.use(express.static(path.join(__dirname)));
+// خدمة الملفات الثابتة من مجلد public
+app.use(express.static(path.join(__dirname, 'public')));
+// الصفحة الرئيسية
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 app.get('/ping', (req, res) => res.send('ok'));
 
 // VAST proxy endpoint
